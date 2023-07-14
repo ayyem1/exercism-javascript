@@ -1,2 +1,2 @@
-# exercism_javascript
+# exercism-javascript
 Javascript Track on Exercism
