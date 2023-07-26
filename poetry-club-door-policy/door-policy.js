@@ -28,12 +28,7 @@ const BACKDOOR_PASSWORD_ENDING = ', please';
  * @returns {string}
  */
 export function frontDoorResponse(line) {
-  if (line === undefined) return '';
-
-  var trimmedLine = line.trimStart();
-  if (trimmedLine.length === 0) return '';
-
-  return trimmedLine[0];
+  return line.trimStart()[0];
 }
 
 /**
@@ -44,15 +39,16 @@ export function frontDoorResponse(line) {
  * @returns {string} the front door password
  */
 export function frontDoorPassword(word) {
-  if (word === undefined) return word;
+  return capitalizeFirstLetterOfWord(word.trimStart());
+}
 
-  var trimmedWord = word.trim();
-  if (trimmedWord.length === 0) return word;
-
-  var firstLetter = trimmedWord[0];
-  if (trimmedWord.length === 1) return firstLetter;
-
-  return firstLetter.toUpperCase().concat(trimmedWord.substring(1).toLowerCase());
+/**
+ * Capitalizes the first letter of the word.
+ * @param {string} word 
+ * @returns {string} word but with the first letter capitalized.
+ */
+function capitalizeFirstLetterOfWord(word) {
+  return word[0].toUpperCase().concat(word.slice(1).toLowerCase());
 }
 
 /**
@@ -63,12 +59,7 @@ export function frontDoorPassword(word) {
  * @returns {string}
  */
 export function backDoorResponse(line) {
-  if (line === undefined) return '';
-
-  var trimmedLine = line.trimEnd();
-  if (trimmedLine.length === 0) return '';
-
-  return trimmedLine[trimmedLine.length - 1];
+  return line.trimEnd().slice(-1);
 }
 
 /**
@@ -79,5 +70,5 @@ export function backDoorResponse(line) {
  * @returns {string} the back door password
  */
 export function backDoorPassword(word) {
-  return frontDoorPassword(word).concat(BACKDOOR_PASSWORD_ENDING);
+  return capitalizeFirstLetterOfWord(word.trim()).concat(BACKDOOR_PASSWORD_ENDING);
 }
